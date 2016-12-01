@@ -2,7 +2,7 @@
 |column|type|not_null|key|
 |:--|:--|:--|:--|
 |name|string|yes||
-|email|string|yes||
+|email|string|yes|unique|
 |encrypted_password|string|yes|　|
 
 ### index
