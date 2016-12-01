@@ -19,8 +19,8 @@ has_many :groups, through: :group_users
 |:--|:--|:--|:--|
 |body|text|||
 |image|string|||
-|user_id|integer|yes|ForeignKey|
-|group_id|integer|yes|ForeignKey|
+|user_id|reference|yes|ForeignKey|
+|group_id|reference|yes|ForeignKey|
 
 
 ### index
@@ -45,8 +45,8 @@ has_many :users, through: :group_users
 # group_users
 |column|type|not_null|key|
 |:--|:--|:--|:--|
-|group_id|integer|yes|ForeignKey|
-|user_id|integer|yes|ForeignKey|
+|group_id|reference|yes|ForeignKey|
+|user_id|reference|yes|ForeignKey|
 
 
 ### relation
