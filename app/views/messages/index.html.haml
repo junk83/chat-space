@@ -3,11 +3,11 @@
 .chat
   .chat-side
     .chat-user
-      %p kimura
+      %p #{current_user.name}
       .chat-user__actions
         %a.chat-user__action{ href: "#" }
           %i.fa.fa-pencil-square-o
-        %a.chat-user__action{ href: "#"}
+        = link_to edit_user_registration_path, class: "chat-user__action" do
           %i.fa.fa-cog
 
     %ul.chat-groups
