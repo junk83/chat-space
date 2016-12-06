@@ -21,7 +21,7 @@ a{
       @include clearfix();
       height: 108px;
       padding: 0 20px;
-      color: #ffffff;
+      color: white;
       background: #253141;
 
       p{
@@ -40,7 +40,7 @@ a{
         .chat-user__action{
           display: inline-block;
           margin: 15px 0 15px 3px;
-          color: #fff;
+          color: white;
           font-size: 20px;
         }
       }
@@ -48,14 +48,14 @@ a{
 
     .chat-groups{
       height: calc(100% - 108px);
-      color: #FFFFFF;
+      color: white;
       list-style: none;
       overflow-y: scroll;
 
       .chat-group__link{
         display: block;
         padding: 20px 20px;
-        color: #ffffff;
+        color: white;
 
         &:hover{
           background-color: #384a62;
@@ -82,7 +82,7 @@ a{
     .chat-header{
       @include clearfix();
       padding: 0 40px;
-      background-color: #fff;
+      background-color: white;
       border-bottom:1px solid #eeeeee;
 
       .chat-header--left{
@@ -116,7 +116,7 @@ a{
           padding-right: 20px;
           padding-left: 20px;
           line-height: 40px;
-          color: #38aef0;
+          color: $blue;
           font-size: 14px;
           border: 2px solid
         }
@@ -184,8 +184,8 @@ a{
         width: 100px;
         margin-left: 15px;
         line-height: 50px;
-        color: #ffffff;
-        background-color: #38aef0;
+        color: white;
+        background-color: $blue;
         text-align: center;
         border: none;
         padding: 0
@@ -218,7 +218,7 @@ a{
           line-height: 50px;
           text-align: center;
           cursor: pointer;
-          background-color: #ffffff;
+          background-color: white;
 
           input{
             display: none;
