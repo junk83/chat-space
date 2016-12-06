@@ -1,8 +1,10 @@
 - if notice
-  #p.layout-notice #{notice}
+  %p.layout-notice
+    = notice
 
 - if alert
-  #p.layout-alert #{alert}
+  %p.layout-alert
+    = alert
 
 #account-page.account-page
   .account-page__inner.clearfix
