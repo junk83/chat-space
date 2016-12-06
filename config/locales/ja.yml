@@ -1,13 +1,13 @@
 ja:
-  attributes:
+  activerecord:
     models:
       user: ユーザ
+  attributes:
     email: メールアドレス
     password: パスワード
     password_confirmation: パスワード確認(確認用)
     current_password: 現在のパスワード
     name: 名前
-    user: ユーザ
 
   date:
     abbr_day_names:
