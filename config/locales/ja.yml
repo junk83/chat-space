@@ -2,6 +2,10 @@ ja:
   activerecord:
     models:
       user: ユーザ
+      group: グループ
+    attributes:
+      group:
+        name: グループ名
   attributes:
     email: メールアドレス
     password: パスワード
