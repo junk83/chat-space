@@ -1,9 +1,12 @@
-%p.layout-notice チャットグループが作成されました。
+- if notice
+  %p.layout-notice
+    = notice
 
 .chat
   .chat-side
     .chat-user
-      %p #{current_user.name}
+      %p
+        = current_user.name
       .chat-user__actions
         %a.chat-user__action{ href: "#" }
           %i.fa.fa-pencil-square-o
