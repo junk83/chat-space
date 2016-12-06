@@ -40,6 +40,7 @@
   }
 
   .chat-group-form__field {
+    @include clearfix;
     margin-top: 30px;
 
     .chat-group-form__field--left {
@@ -72,6 +73,7 @@
   }
 
   .chat-group-user {
+    @include clearfix;
     padding: 0 15px;
     line-height: 50px;
     font-size: 14px;
