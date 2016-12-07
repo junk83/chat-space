@@ -14,7 +14,7 @@ class GroupsController < ApplicationController
     if @group.save
       redirect_to group_messages_path(@group), notice: 'グループが作成されました。'
     else
-      render "new"
+      render :new
     end
   end
 
@@ -27,7 +27,7 @@ class GroupsController < ApplicationController
     if @group.update_attributes(group_params)
       redirect_to group_messages_path(@group), notice: 'チャットグループが更新されました。'
     else
-      render "edit"
+      render :edit
     end
   end
 
