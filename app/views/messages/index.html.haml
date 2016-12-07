@@ -12,45 +12,25 @@
       .chat-header--right
         = link_to "Edit", edit_group_path(@group), class: "chat-header__edit-btn"
 
-  -# 現時点ではダミーのメッセージデータ
   .chat-body
     %ul.chat-messages
-      %li.chat-message
-        .chat-message__header
-          %p.chat-message__name taro
-          %p.chat-message__time 2016/12/01 08:27:51
-        %p.chat-message__body テストです
-      %li.chat-message
-        .chat-message__header
-          %p.chat-message__name kimura
-          %p.chat-message__time 2016/12/02 08:27:51
-        %p.chat-message__body がんばります
-      %li.chat-message
-        .chat-message__header
-          %p.chat-message__name taro
-          %p.chat-message__time 2016/12/01 08:27:51
-        %p.chat-message__body テストです
-      %li.chat-message
-        .chat-message__header
-          %p.chat-message__name kimura
-          %p.chat-message__time 2016/12/02 08:27:51
-        %p.chat-message__body がんばります
-      %li.chat-message
-        .chat-message__header
-          %p.chat-message__name taro
-          %p.chat-message__time 2016/12/01 08:27:51
-        %p.chat-message__body テストです
-      %li.chat-message
-        .chat-message__header
-          %p.chat-message__name kimura
-          %p.chat-message__time 2016/12/02 08:27:51
-        %p.chat-message__body がんばります
+      - if @messages
+        - @messages.each do |message|
+          %li.chat-message
+            .chat-message__header
+              %p.chat-message__name
+                = message.user.name
+              %p.chat-message__time
+                = l message.created_at, format: :default
+            %p.chat-message__body
+              = message.body
 
   .chat-footer
-    %form{ action: "#", method: "post" }
+    = form_for [@group, @message] do |f|
       .chat-footer__body
-        %textarea{ row: "1", placeholder: "type a message" }
+        = f.text_area :body, row: "1", placeholder: "type a message"
+        -# 以下の画像投稿部分は後で編集する
         %label.chat-footer__file
           %input#message_image{ type: "file", }
           %i.fa.fa-image
-      %input{ type: "submit", value: "Send" }
+      = f.submit "Send"
