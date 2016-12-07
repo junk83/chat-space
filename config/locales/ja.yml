@@ -3,9 +3,12 @@ ja:
     models:
       user: ユーザ
       group: グループ
+      message: メッセージ
     attributes:
       group:
         name: グループ名
+      message:
+        body: メッセージ
   attributes:
     email: メールアドレス
     password: パスワード
