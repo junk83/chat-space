@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %meta{ content: "text/html; charset=UTF-8", http: { equiv: "Content-Type" }}/
+    %title ChatSpace
+    = stylesheet_link_tag    'application', media: 'all', data: { turbolinks: { track: true }}
+    = javascript_include_tag 'application', data: { turbolinks: { track: true }}
+    = csrf_meta_tags
+  %body
+    - if notice
+      %p.layout-notice
+        = notice
+
+    .chat
+      .chat-side
+        .chat-user
+          %p
+            = current_user.name
+          .chat-user__actions
+            = link_to new_group_path, class: "chat-user__action" do
+              %i.fa.fa-pencil-square-o
+            = link_to edit_user_registration_path, class: "chat-user__action" do
+              %i.fa.fa-cog
+
+        %ul.chat-groups
+          - if @groups
+            - @groups.each do |group|
+              %li.chat-group
+                = link_to group_messages_path(group.id), class: "chat-group__link" do
+                  %p.chat-group__name
+                    = group.name
+                  %p.chat-group__message まだメッセージはありません。
+      = yield
