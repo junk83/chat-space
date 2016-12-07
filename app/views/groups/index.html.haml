@@ -8,44 +8,19 @@
       %p
         = current_user.name
       .chat-user__actions
-        %a.chat-user__action{ href: "#" }
+        = link_to new_group_path, class: "chat-user__action" do
           %i.fa.fa-pencil-square-o
         = link_to edit_user_registration_path, class: "chat-user__action" do
           %i.fa.fa-cog
 
     %ul.chat-groups
-      %li.chat-group
-        %a.chat-group__link{ href: "#" }
-          %p.chat-group__name TECH::CAMP
-          %p.chat-group__message がんばります
-      %li.chat-group
-        %a.chat-group__link{ href: "#" }
-          %p.chat-group__name test1
-          %p.chat-group__message まだメッセージはありません。
-      %li.chat-group
-        %a.chat-group__link{ href: "#" }
-          %p.chat-group__name test2
-          %p.chat-group__message まだメッセージはありません。
-      %li.chat-group
-        %a.chat-group__link{ href: "#" }
-          %p.chat-group__name test3
-          %p.chat-group__message まだメッセージはありません。
-      %li.chat-group
-        %a.chat-group__link{ href: "#" }
-          %p.chat-group__name test4
-          %p.chat-group__message まだメッセージはありません。
-      %li.chat-group
-        %a.chat-group__link{ href: "#" }
-          %p.chat-group__name test5
-          %p.chat-group__message まだメッセージはありません。
-      %li.chat-group
-        %a.chat-group__link{ href: "#" }
-          %p.chat-group__name test6
-          %p.chat-group__message まだメッセージはありません。
-      %li.chat-group
-        %a.chat-group__link{ href: "#" }
-          %p.chat-group__name test7
-          %p.chat-group__message まだメッセージはありません。
+      - if @groups
+        - @groups.each do |group|
+          %li.chat-group
+            = link_to group_messages_path(group.id), class: "chat-group__link" do
+              %p.chat-group__name
+                = group.name
+              %p.chat-group__message まだメッセージはありません。
 
   .chat-main
     .chat-header
