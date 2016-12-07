@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207103034) do
+ActiveRecord::Schema.define(version: 20161207104008) do
 
   create_table "group_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "group_id"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20161207103034) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["group_id"], name: "index_messages_on_group_id", using: :btree
+    t.index ["user_id", "group_id"], name: "index_messages_on_user_id_and_group_id", using: :btree
     t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
   end
 
