@@ -1,4 +1,8 @@
 class GroupsController < ApplicationController
+  def index
+    @groups = Group.includes(:users).where(group_users: {user_id: current_user.id})
+  end
+  
   def new
     @group = Group.new
   end
