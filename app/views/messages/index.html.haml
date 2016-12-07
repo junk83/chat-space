@@ -1,101 +1,56 @@
-- if notice
-  %p.layout-notice
-    = notice
-
-.chat
-  .chat-side
-    .chat-user
-      %p
-        = current_user.name
-      .chat-user__actions
-        %a.chat-user__action{ href: "#" }
-          %i.fa.fa-pencil-square-o
-        = link_to edit_user_registration_path, class: "chat-user__action" do
-          %i.fa.fa-cog
-
-    %ul.chat-groups
-      %li.chat-group
-        %a.chat-group__link{ href: "#" }
-          %p.chat-group__name TECH::CAMP
-          %p.chat-group__message がんばります
-      %li.chat-group
-        %a.chat-group__link{ href: "#" }
-          %p.chat-group__name test1
-          %p.chat-group__message まだメッセージはありません。
-      %li.chat-group
-        %a.chat-group__link{ href: "#" }
-          %p.chat-group__name test2
-          %p.chat-group__message まだメッセージはありません。
-      %li.chat-group
-        %a.chat-group__link{ href: "#" }
-          %p.chat-group__name test3
-          %p.chat-group__message まだメッセージはありません。
-      %li.chat-group
-        %a.chat-group__link{ href: "#" }
-          %p.chat-group__name test4
-          %p.chat-group__message まだメッセージはありません。
-      %li.chat-group
-        %a.chat-group__link{ href: "#" }
-          %p.chat-group__name test5
-          %p.chat-group__message まだメッセージはありません。
-      %li.chat-group
-        %a.chat-group__link{ href: "#" }
-          %p.chat-group__name test6
-          %p.chat-group__message まだメッセージはありません。
-      %li.chat-group
-        %a.chat-group__link{ href: "#" }
-          %p.chat-group__name test7
-          %p.chat-group__message まだメッセージはありません。
-
-  .chat-main
+.chat-main
+  - if @group
     .chat-header
       .chat-header--left
-        %h1 TECH::CAMP
+        %h1
+          = @group.name
         %p.chat-header__users
           Members:
-          %span.chat-header__user kimura
-          %span.chat-header__user taro
+          - @group.users.each do |user|
+            %span.chat-header__user
+              = user.name
       .chat-header--right
-        %a.chat-header__edit-btn{ href: "#"} Edit
+        = link_to "Edit", edit_group_path(@group), class: "chat-header__edit-btn"
 
-    .chat-body
-      %ul.chat-messages
-        %li.chat-message
-          .chat-message__header
-            %p.chat-message__name taro
-            %p.chat-message__time 2016/12/01 08:27:51
-          %p.chat-message__body テストです
-        %li.chat-message
-          .chat-message__header
-            %p.chat-message__name kimura
-            %p.chat-message__time 2016/12/02 08:27:51
-          %p.chat-message__body がんばります
-        %li.chat-message
-          .chat-message__header
-            %p.chat-message__name taro
-            %p.chat-message__time 2016/12/01 08:27:51
-          %p.chat-message__body テストです
-        %li.chat-message
-          .chat-message__header
-            %p.chat-message__name kimura
-            %p.chat-message__time 2016/12/02 08:27:51
-          %p.chat-message__body がんばります
-        %li.chat-message
-          .chat-message__header
-            %p.chat-message__name taro
-            %p.chat-message__time 2016/12/01 08:27:51
-          %p.chat-message__body テストです
-        %li.chat-message
-          .chat-message__header
-            %p.chat-message__name kimura
-            %p.chat-message__time 2016/12/02 08:27:51
-          %p.chat-message__body がんばります
+  -# 現時点ではダミーのメッセージデータ
+  .chat-body
+    %ul.chat-messages
+      %li.chat-message
+        .chat-message__header
+          %p.chat-message__name taro
+          %p.chat-message__time 2016/12/01 08:27:51
+        %p.chat-message__body テストです
+      %li.chat-message
+        .chat-message__header
+          %p.chat-message__name kimura
+          %p.chat-message__time 2016/12/02 08:27:51
+        %p.chat-message__body がんばります
+      %li.chat-message
+        .chat-message__header
+          %p.chat-message__name taro
+          %p.chat-message__time 2016/12/01 08:27:51
+        %p.chat-message__body テストです
+      %li.chat-message
+        .chat-message__header
+          %p.chat-message__name kimura
+          %p.chat-message__time 2016/12/02 08:27:51
+        %p.chat-message__body がんばります
+      %li.chat-message
+        .chat-message__header
+          %p.chat-message__name taro
+          %p.chat-message__time 2016/12/01 08:27:51
+        %p.chat-message__body テストです
+      %li.chat-message
+        .chat-message__header
+          %p.chat-message__name kimura
+          %p.chat-message__time 2016/12/02 08:27:51
+        %p.chat-message__body がんばります
 
-    .chat-footer
-      %form{ action: "#", method: "post" }
-        .chat-footer__body
-          %textarea{ row: "1", placeholder: "type a message" }
-          %label.chat-footer__file
-            %input#message_image{ type: "file", }
-            %i.fa.fa-image
-        %input{ type: "submit", value: "Send" }
+  .chat-footer
+    %form{ action: "#", method: "post" }
+      .chat-footer__body
+        %textarea{ row: "1", placeholder: "type a message" }
+        %label.chat-footer__file
+          %input#message_image{ type: "file", }
+          %i.fa.fa-image
+      %input{ type: "submit", value: "Send" }
