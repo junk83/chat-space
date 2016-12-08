@@ -29,6 +29,8 @@ gem 'haml-rails'
 gem 'font-awesome-rails'
 # Devise
 gem 'devise'
+# Rspec
+gem 'rspec-rails', "~> 3.1.0"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
