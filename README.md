@@ -17,7 +17,7 @@ has_many :groups, through: :group_users
 # messages table
 |column|type|not_null|key|
 |:--|:--|:--|:--|
-|body|text|||
+|body|text|yes||
 |image|string|||
 |user_id|reference|yes|ForeignKey|
 |group_id|reference|yes|ForeignKey|
