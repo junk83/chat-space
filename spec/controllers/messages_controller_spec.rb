@@ -17,6 +17,11 @@ describe MessagesController do
   end
 
   describe 'POST #create' do
+    it "assigns the requested contact to @group" do
+      post :create, params: { message: attributes_for(:message), group_id: group.id, user_id: user.id }
+      expect(assigns(:group)).to eq group
+    end
+
     context "valid with a body" do
       it "saves the new message in the database" do
         expect{
@@ -26,7 +31,7 @@ describe MessagesController do
 
       it "redirects to the group messages path" do
         post :create, params: { message: attributes_for(:message), group_id: group.id, user_id: user.id }
-        expect(response).to redirect_to group_messages_path(assigns(:group))
+        expect(response).to redirect_to group_messages_path
       end
     end
 
@@ -39,7 +44,7 @@ describe MessagesController do
 
       it "redirects to the group messages path" do
         post :create, params: { message: attributes_for(:message, body: nil), group_id: group.id, user_id: user.id }
-        expect(response).to redirect_to group_messages_path(assigns(:group))
+        expect(response).to redirect_to group_messages_path
       end
     end
   end
