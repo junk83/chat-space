@@ -3,13 +3,29 @@ require 'rails_helper'
 describe MessagesController do
   let(:user) { create(:user) }
   let(:group) { create(:group) }
+  let(:groups) { create_list(:group, 3, user_ids: user.id) }
   let(:message) { build(:message) }
+  let(:messages) { create_list(:message, 3, user_id: user.id, group_id: group.id) }
 
   before do
-    login_user user
+    sign_in user
+  end
+
+  after do
+    sign_out user
   end
 
   describe 'GET #index' do
+    it "assigns the requested contact to @groups" do
+      get :index, params: { group_id: group.id}
+      expect(assigns(:groups)).to match(groups)
+    end
+
+    it "assigns the requested contact to @messages" do
+      get :index, params: { group_id: group.id}
+      expect(assigns(:messages)).to match(messages)
+    end
+
     it "renders the :index template" do
       get :index, params: { group_id: group.id }
       expect(response).to render_template :index
