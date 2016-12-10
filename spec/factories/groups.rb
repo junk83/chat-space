@@ -1,7 +1,9 @@
 FactoryGirl.define do
 
   factory :group do
-    name      "test group"
+    sequence :name do |n|
+      "group#{n}"
+    end
   end
 
 end
