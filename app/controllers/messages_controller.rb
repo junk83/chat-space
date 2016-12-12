@@ -11,10 +11,29 @@ class MessagesController < GroupsController
   def create
     @group = Group.find(params[:group_id])
     @message = Message.new(message_params)
-    if @message.save
-      redirect_to group_messages_path(@group)
+    if @message.valid?
+      @message.save
+      respond_to do |format|
+        format.html { redirect_to group_messages_path(@group) }
+        format.json { render json: {
+            status: 200,
+            body: @message.body,
+            name: @message.user.name,
+            created_at: @message.created_at.strftime("%Y/%m/%d %H:%M:%S")
+          }
+         }
+      end
     else
-      redirect_to group_messages_path(@group), alert: @message.errors.full_messages[0]
+      respond_to do |format|
+        format.html {
+          redirect_to group_messages_path(@group), alert: @message.errors.full_messages[0]
+        }
+        format.json { render json: {
+            status: 400,
+            alert: @message.errors.full_messages[0]
+          }
+        }
+      end
     end
   end
 
