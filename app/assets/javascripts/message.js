@@ -8,13 +8,13 @@ function buildHTML(message) {
   return $('<li class="chat-message">').append(html);
 }
 
-function buildALERT() {
-  var html = $('.chat').before('<p class="layout-alert">メッセージを入力してください。</p>');
+function buildALERT(alert) {
+  var html = $('.chat').before('<p class="layout-alert">' + alert + '</p>');
 }
 
 $(document).on('submit', '.new_message', function(e) {
   e.preventDefault();
-  // $('.layout-alert').remove();
+  $('.layout-alert').remove();
   var textField = $('#message_body');
   var message = textField.val();
   var url = $('.new_message').attr('action');
@@ -29,18 +29,21 @@ $(document).on('submit', '.new_message', function(e) {
     dataType: 'json',
   })
   .done(function(data) {
-    // メッセージの表示
-    console.log(data);
-    var html = buildHTML(data);
-    $('.chat-messages').append(html);
-    // サイドメニューのメッセージ更新処理
-    $('.chat-group__link[href = "' + url + '"]').find('p.chat-group__message').text(data.body);
+    if(data.status == 200){
+      // 投稿メッセージのhtmlを生成し、画面上に表示する
+      var html = buildHTML(data);
+      $('.chat-messages').append(html);
+      // サイドメニューの最新メッセージを更新する
+      $('.chat-group__link[href = "' + url + '"]').find('p.chat-group__message').text(data.body);
+    }else{
+      //バリデーションエラー時のアラートメッセージを画面上に表示する
+      buildALERT(data.alert);
+    }
     textField.val('');
     $(".chat-footer__btn").prop("disabled", false);
   })
   .fail(function() {
-    alert('メッセージを入力してください。');
-    // buildALERT();
+    buildALERT("通信エラーが発生しました。");
     $(".chat-footer__btn").prop("disabled", false);
   });
 });
