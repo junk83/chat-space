@@ -17,7 +17,7 @@ $(document).on('submit', '.new_message', function(e) {
   $('.layout-alert').remove();
   var textField = $('#message_body');
   var message = textField.val();
-  var url = $('.new_message').attr('action');
+  var url = $(this).attr('action');
   $.ajax({
     type: 'POST',
     url: url + '.json',
