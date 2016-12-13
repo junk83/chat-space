@@ -9,12 +9,6 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
 
-  def search
-    name = "%#{params[:keyword]}%"
-    @users = User.find_by_sql(["select * from users where name like ? and not id= ?", name, current_user.id])
-    render json: @users
-  end
-
   def create
     @group = Group.new(group_params)
     if @group.save
