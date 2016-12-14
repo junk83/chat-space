@@ -11,3 +11,9 @@
 /log/*
 !/log/.keep
 /tmp
+.tags
+.tags1
+*.jpg
+*.jpeg
+*.gif
+*.png
