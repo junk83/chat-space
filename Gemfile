@@ -48,6 +48,7 @@ group :development, :test do
   gem 'factory_girl_rails', "~> 4.4.1"
   gem 'rails-controller-testing'
   gem 'pry-rails'
+  gem 'dotenv-rails'
 end
 
 group :development do
