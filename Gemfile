@@ -31,6 +31,10 @@ gem 'font-awesome-rails'
 gem 'devise'
 # carrierwave
 gem 'carrierwave'
+# rmagick
+gem 'rmagick'
+# fog
+gem 'fog'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
