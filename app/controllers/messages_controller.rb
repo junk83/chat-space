@@ -11,6 +11,10 @@ class MessagesController < GroupsController
   def create
     @group = Group.find(params[:group_id])
     @message = Message.new(message_params)
+
+    # 画像が投稿されたが、メッセージが空の場合
+     @message.body = '画像を送信しました。' if message_params[:image] && @message.body.empty?
+
     if @message.valid?
       @message.save
       respond_to do |format|
@@ -19,6 +23,7 @@ class MessagesController < GroupsController
             status: 200,
             body: @message.body,
             name: @message.user.name,
+            image_url: @message.image.url,
             created_at: @message.created_at.strftime("%Y/%m/%d %H:%M:%S")
           }
          }
@@ -39,6 +44,6 @@ class MessagesController < GroupsController
 
   private
   def message_params
-    params.require(:message).permit(:body).merge(user_id: current_user.id, group_id: params[:group_id])
+    params.require(:message).permit(:body, :image).merge(user_id: current_user.id, group_id: params[:group_id])
   end
 end
