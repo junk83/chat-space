@@ -1,4 +1,5 @@
 $(function(){
+
   //メッセージhtml生成関数
   function buildHTML(message) {
     var html = '<div class="chat-message__header">' +
@@ -11,7 +12,6 @@ $(function(){
     if(message.image_url){
       html += '<br><img src=' + message.image_url + '>';
     }
-
     return $('<li class="chat-message">').append(html);
   }
 
@@ -42,6 +42,8 @@ $(function(){
           $('.chat-messages').append(html);
           // サイドメニューの最新メッセージを更新する
           $('.chat-group__link[href = "' + url + '"]').find('p.chat-group__message').text(data.body);
+          // メッセージ画面を一番下までスクロールする
+            $('.chat-body').animate({ scrollTop: $('.chat-body')[0].scrollHeight}, 'normal');
         }else{
           //バリデーションエラー時のアラートメッセージを画面上に表示する
           buildALERT(data.alert);
@@ -57,9 +59,44 @@ $(function(){
       });
   };
 
+  // メッセージ自動更新クロージャ
+  var automaticLoad = function(){
+    //urlが/groups/group_id/messagesのときのみ作動する
+    if(location.pathname.match(/groups\/\d+\/messages/)){
+      // 現在画面に表示されているメッセージ件数
+      var messageCount = $('.chat-message').length;
+      $.ajax({
+        type: 'GET',
+        url: location.pathname + '.json',
+        dataType: 'json'
+      })
+      .done(function(data){
+        // APIから取得したメッセージ件数が、現在画面に表示されているメッセージ件数より多い場合、htmlを生成する
+        if(data.messages.length > messageCount){
+          //追加されたメッセージのみループ処理する
+          for (var i = messageCount; i < data.messages.length; i++) {
+            var html = buildHTML(data.messages[i]);
+            //メッセージを画面に表示する
+            $('.chat-messages').append(html);
+            // サイドメニューの最新メッセージを更新する
+            $('.chat-group__link[href = "' + location.pathname + '"]').find('p.chat-group__message').text(data.messages[i].body);
+          }
+          // メッセージ画面を一番下までスクロールする
+          $('.chat-body').animate({ scrollTop: $('.chat-body')[0].scrollHeight}, 'normal');
+        }
+      })
+      .fail(function(){
+        console.log('自動更新失敗');
+      });
+    }
+  };
+
   // Sendボタンが押された場合の処理
   $(document).on('submit', '.new_message', messageSubmit);
   // ファイルが選択された場合の処理
   $(document).on('change', '#message_image', messageSubmit);
+
+  // 自動更新処理
+  setInterval(automaticLoad, 10000);
 
 });
