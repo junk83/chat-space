@@ -13,7 +13,7 @@ class MessagesController < GroupsController
     @message = Message.new(message_params)
 
     # 画像が投稿されたが、メッセージが空の場合
-     @message.body = '画像を送信しました。' if message_params[:image] && @message.body.empty?
+    @message.body = '画像を送信しました。' if message_params[:image] && @message.body.empty?
 
     if @message.valid?
       @message.save
