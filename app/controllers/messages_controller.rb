@@ -6,6 +6,24 @@ class MessagesController < GroupsController
     @group = Group.find(params[:group_id])
     @messages = Message.includes(:user).where(group_id: params[:group_id])
     @message = Message.new
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json {
+        message_array = []
+        @messages.each do |message|
+          message_array << {
+            body: message.body,
+            name: message.user.name,
+            image_url: message.image.url,
+            created_at: message.created_at.strftime("%Y/%m/%d %H:%M:%S")
+          }
+        end
+        render json: {
+          messages: message_array
+        }
+      }
+    end
   end
 
   def create
