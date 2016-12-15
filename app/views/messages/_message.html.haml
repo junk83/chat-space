@@ -1,0 +1,10 @@
+%li.chat-message
+  .chat-message__header
+    %p.chat-message__name
+      = message.user.name
+    %p.chat-message__time
+      = l message.created_at, format: :default
+  %p.chat-message__body
+    = message.body
+    - if message.image.url
+      %br= image_tag message.image.url
