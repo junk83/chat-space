@@ -14,23 +14,13 @@
 
   .chat-body
     %ul.chat-messages
-      - if @messages
-        - @messages.each do |message|
-          %li.chat-message
-            .chat-message__header
-              %p.chat-message__name
-                = message.user.name
-              %p.chat-message__time
-                = l message.created_at, format: :default
-            %p.chat-message__body
-              = message.body
+      = render @messages
 
   .chat-footer
     = form_for [@group, @message] do |f|
       .chat-footer__body
         = f.text_area :body, row: "1", placeholder: "type a message"
-        -# 以下の画像投稿部分は後で編集する
         %label.chat-footer__file
-          %input#message_image{ type: "file", }
+          = f.file_field :image
           %i.fa.fa-image
       = f.submit "Send", class: "chat-footer__btn"

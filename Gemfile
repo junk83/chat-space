@@ -29,6 +29,12 @@ gem 'haml-rails'
 gem 'font-awesome-rails'
 # Devise
 gem 'devise'
+# carrierwave
+gem 'carrierwave'
+# rmagick
+gem 'rmagick'
+# fog
+gem 'fog'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -46,6 +52,7 @@ group :development, :test do
   gem 'factory_girl_rails', "~> 4.4.1"
   gem 'rails-controller-testing'
   gem 'pry-rails'
+  gem 'dotenv-rails'
 end
 
 group :development do
