@@ -53,6 +53,14 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'pry-rails'
   gem 'dotenv-rails'
+  gem 'capistrano'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+end
+
+group :production, :staging do
+  gem 'unicorn'
 end
 
 group :development do
