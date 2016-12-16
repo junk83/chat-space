@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock "3.4.0"
+lock "3.7.0"
 
 set :application, "chat-space"
 set :repo_url, "git@github.com:junk83/chat-space.git"
