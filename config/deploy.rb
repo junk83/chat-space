@@ -9,7 +9,7 @@ set :repo_url, "git@github.com:junk83/chat-space.git"
 set :branch, 'master'
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/var/www/chat-space"
+set :deploy_to, "/var/www/chat-space/current"
 
 set :linked_files, fetch(:linked_files, []).push('config/secrets.yml')
 
